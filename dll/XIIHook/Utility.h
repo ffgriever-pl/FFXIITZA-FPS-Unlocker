@@ -39,11 +39,13 @@ struct gameVars
 	volatile double* realFrameTime = (double*)realFrameTimePtr;
 	volatile float* timeScale = (float*)timeScalePtr;
 	volatile float* framerateCoef = (float*)framerateCoefPtr;
+	volatile float* invFramerateCoef = (float*)invFramerateCoefPtr;
 	volatile float* worldTime = (float*)worldMPtr;
 	volatile float* inGameMultiplier = (float*)igmPtr;
 	volatile float* inGameMouseMultiplier = (float*)mouseCoefPtr;
 	volatile float* gamma = (float*)gammaPtr;
 	volatile float* fov = (float*)fovPtr;
+	volatile float* aoeActionDummy = (float*)actionAoeFixDummyPtr;
 
 	volatile uint8_t* ctrlEnabled = (uint8_t*)ctrlEnabledPtr;
 	volatile uint8_t* titleState = (uint8_t*)inTitlePtr;
@@ -81,6 +83,7 @@ struct gameVars
 
 		print("Normalizing config...\n");
 		*framerateCoef = 30.f / uConfig.requestedMinFramerate;
+		*invFramerateCoef = 1.f / *framerateCoef;
 		uConfig.requestedMinFramerate = 1.f / uConfig.requestedMinFramerate;
 		uConfig.requestedMinFramerateMenus = 1.f / uConfig.requestedMinFramerateMenus;
 		uConfig.requestedMinFramerateNoFocus = 1.f / uConfig.requestedMinFramerateNoFocus;
